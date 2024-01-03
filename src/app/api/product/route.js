@@ -27,27 +27,6 @@ export async function GET(req, res) {
   }
 }
 
-export async function getByOne(req, res) {
-    const { query } = parse(req.url, Boolean(1));
-try {
-  const product = await prisma.product.findFirst({
-    include: {
-      images: true,
-    },
-    where:{
-        id:query.id
-    }
-  });
-
-  return new NextResponse(JSON.stringify(product), {
-    status: 201,
-    headers: { "Content-Type": "application/json" },
-  });
-} catch (error) {
-  return new NextResponse(error.message, { status: 500 });
-}
-}
-
 export async function POST(req, res) {
   Middleware(req,res)
   try {
