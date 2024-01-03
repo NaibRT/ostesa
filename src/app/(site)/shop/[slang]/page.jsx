@@ -4,6 +4,7 @@ import { faPlus, faMinus, faStarHalf } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NextRequest } from "next/server";
 import React from "react";
+import {getURL} from "../../../utils"
 
 const products = [
   {
@@ -79,7 +80,7 @@ async function getProduct(id) {
     isLoading: true,
   };
   
-  const res = await fetch(`${process.env.DEVOLOPMENT_URL}/api/product/${id}?id=${id}`);
+  const res = await fetch(`${getURL()}/api/product/${id}?id=${id}`);
 
   if (!res.ok) {
     result.error = res.status;

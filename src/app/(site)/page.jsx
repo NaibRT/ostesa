@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "../page.module.css";
 import ProductCard from "../components/ProductCard";
 import CategoryCard from "../components/CategoryCard";
+import {getURL} from "../utils";
 
 // const products = [
 //   {
@@ -113,7 +114,7 @@ async function getProducts() {
     isLoading: true,
   };
 
-  const res = await fetch(`${process.env.DEVOLOPMENT_URL}/api/product`);
+  const res = await fetch(`${getURL()}/api/product`);
 
   if (!res.ok) {
     result.error = res.status;
@@ -133,7 +134,7 @@ async function getCategories() {
     isLoading: true,
   };
 
-  const res = await fetch(`${process.env.DEVOLOPMENT_URL}/api/category`);
+  const res = await fetch(`${getURL()}/api/category`);
 
   if (!res.ok) {
     result.error = res.status;

@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { env } from "process";
+import {getURL} from "../../../utils";
 
 async function getCategories() {
   let result = {
@@ -22,7 +23,7 @@ async function getCategories() {
     isLoading: true,
   };
 
-  const res = await fetch(`${process.env.DEVOLOPMENT_URL}/api/category`);
+  const res = await fetch(`${getURL()}/api/category`);
 
   if (!res.ok) {
     result.error = res.status;

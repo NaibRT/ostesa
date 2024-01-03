@@ -2,6 +2,7 @@ import React from "react";
 import Breadcrumb from "../../components/Breadcrumb";
 import ProductCard from "../../components/ProductCard";
 import { Product } from "@/app/type";
+import {getURL} from "../../utils"
 
 async function getProduct() {
   let result = {
@@ -10,7 +11,7 @@ async function getProduct() {
     isLoading: true,
   };
   
-  const res = await fetch(`${process.env.DEVOLOPMENT_URL}/api/product/`);
+  const res = await fetch(`${getURL()}/api/product/`);
 
   if (!res.ok) {
     result.error = res.status;
