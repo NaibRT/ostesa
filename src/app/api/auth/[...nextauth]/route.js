@@ -36,6 +36,7 @@ export const authOptions = {
           credentials: {
             email: { label: "Email", type: "email", placeholder: "jsmith@" },
             password: { label: "Password", type: "password",placeholder:"your-pass" },
+            client_secret:process.env.NEXTAUTH_SECRET
           },
           async authorize(credentials, req) {
             // You need to provide your own logic here that takes the credentials
