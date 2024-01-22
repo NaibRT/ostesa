@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/PrismaClient"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  userToRole UserToRole[]
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  category    Category @relation(fields: [categoryID], references: [id], onDelete: Cascade)
+  categoryID  String
+  images      Image[]
+  price       Float
+  discount    Float
+  stock       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Image {
+  id        String   @id @default(uuid())
+  name      String
+  product   Product  @relation(fields: [productID], references: [id], onDelete: Cascade)
+  productID String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id        String    @id @default(uuid())
+  name      String
+  image     String
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Shop {
+  id           String @id @default(uuid())
+  about        String
+  contacts     String
+  adress       String
+  sosialmedias String
+}
+
+model Role {
+  id     String @id @default(uuid())
+  name   String @unique
+  userToRole UserToRole[]
+}
+
+model UserToRole{
+  id     String @id @default(uuid())
+  userID String
+  roleID String
+  user   User   @relation(fields: [userID], references: [id], onDelete: Cascade)
+  role   Role   @relation(fields: [roleID], references: [id], onDelete: Cascade)
+}
