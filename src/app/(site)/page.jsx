@@ -3,7 +3,7 @@ import styles from "../page.module.css";
 import ProductCard from "../components/ProductCard";
 import CategoryCard from "../components/CategoryCard";
 import {getURL} from "../utils";
-import prisma from "../../lib/prisma"
+import { prisma } from "../../lib/prisma.ts"
 
 // const products = [
 //   {
@@ -117,19 +117,19 @@ async function getProducts() {
   };
 
   const res = await fetch(`${getURL()}/api/product`);
-  const products = await prisma.product.findMany();
-  console.log("products",products);
+  const pro = await prisma.product.findMany();
+    console.log("pro",pro);
 
-  // if (!res.ok) {
-  //   console.log("res.status",res.status)
-  //   result.error = res.status;
-  //   result.isLoading = false;
-  // } else {
-  //   result.data = await res.json();
-  //   console.log("res.data",res.data)
+  if (!res.ok) {
+    console.log("res.status",res.status)
+    result.error = res.status;
+    result.isLoading = false;
+  } else {
+    result.data = await res.json();
+    console.log("res.data",res.data)
 
-  //   result.isLoading = false;
-  // }
+    result.isLoading = false;
+  }
 
   return result;
 };
