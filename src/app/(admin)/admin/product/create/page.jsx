@@ -43,7 +43,7 @@ async function getCategories() {
 }
 
  function Create() {
-    const { register, handleSubmit, formState } = useForm({
+    const { register, handleSubmit, formState, reset } = useForm({
         resolver:yupResolver(schema)
     });
     const { errors, } = formState;
@@ -100,7 +100,8 @@ async function getCategories() {
         setCreateResult({
           status:"alert-success",
           text:"Ururn yerlesdirildi"
-        })
+        });
+         reset();
       } catch (error) {
 
         setCreateResult({
