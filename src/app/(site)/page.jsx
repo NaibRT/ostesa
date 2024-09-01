@@ -117,10 +117,13 @@ async function getProducts() {
   const res = await fetch(`${getURL()}/api/product`);
 
   if (!res.ok) {
+    console.log("res.status",res.status)
     result.error = res.status;
     result.isLoading = false;
   } else {
     result.data = await res.json();
+    console.log("res.data",res.data)
+
     result.isLoading = false;
   }
 
@@ -152,6 +155,8 @@ async function getCategories() {
 export default async  function Home() {
   const pResult = await getProducts();
   const cResult = await getCategories();
+  console.log("pResult",pResult)
+  console.log("cResult",cResult)
 
   return (
     <>
